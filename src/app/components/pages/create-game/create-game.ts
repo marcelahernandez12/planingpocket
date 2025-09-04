@@ -11,14 +11,11 @@ import { JoinGameModalComponent } from '../../organisms/join-game-modal/join-gam
   styleUrl: './create-game.scss'
 })
 export class CreateGame {
- // 1. Crea una variable pública para el modal
   isModalOpen = false;
 
   constructor() { }
 
   openModal(gameName: string) {
-    console.log('Nombre de la partida:', gameName);
-    // 2. Cambia el valor de la variable a true
     this.isModalOpen = true; 
   }
 }

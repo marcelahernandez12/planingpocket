@@ -18,10 +18,8 @@ export class GameBoard implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // Recupera el ID de la partida de la URL
     this.gameId = this.route.snapshot.paramMap.get('id');
     
-    // Recupera los datos del local storage
     const savedGameData = localStorage.getItem('gameData');
     if (savedGameData) {
       const userData = JSON.parse(savedGameData);

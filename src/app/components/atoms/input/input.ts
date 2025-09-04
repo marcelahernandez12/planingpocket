@@ -21,7 +21,11 @@ export class InputText implements ControlValueAccessor {
   value = '';
   onChange = (_: any) => {};
   onTouched = () => {};
-
+  onInput(event: Event): void {
+    const newValue = (event.target as HTMLInputElement).value;
+    this.value = newValue;     // 👈 actualiza lo que se muestra
+    this.onChange(newValue);   // 👈 notifica al FormControl
+  }
   writeValue(value: any): void {
     this.value = value ?? '';
   }

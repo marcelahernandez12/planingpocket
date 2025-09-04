@@ -7,10 +7,9 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
-  ValidationErrors,
-  AbstractControl,
   FormControl
 } from '@angular/forms';
+import { FormUtils } from '../../../utils/form-utils';
 @Component({
   selector: 'app-create-game-form',
   standalone: true,
@@ -30,34 +29,15 @@ export class CreateGameForm {
           Validators.required,
           Validators.minLength(5),
           Validators.maxLength(20),
-          this.nameValidator(),
+          FormUtils.nameValidator(),
         ],
       ],
     });
   }
   
-  nameValidator() {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value: string = control.value || '';
-      const specialChars = /[_*#\/-]/;
-      const numbers = value.match(/\d/g) || [];
-      const hasOnlyNumbers = /^\d+$/.test(value);
-
-      if (specialChars.test(value)) {
-        return { specialChars: true };
-      }
-      if (numbers.length > 3) {
-        return { maxNumbers: true };
-      }
-      if (hasOnlyNumbers) {
-        return { onlyNumbers: true };
-      }
-      return null;
-    };
-  }
+  
 
   onSubmit() {
-    console.log("entro")
     if (this.gameForm.valid) {
       this.formSubmit.emit(this.gameForm.value.gameName);
     } else {

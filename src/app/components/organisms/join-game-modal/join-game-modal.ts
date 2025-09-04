@@ -47,7 +47,6 @@ export class JoinGameModalComponent {
           }
         });
     } else {
-      console.log('Formulario inválido');
       this.joinForm.markAllAsTouched();
     }
   }
@@ -59,4 +58,5 @@ export class JoinGameModalComponent {
   get userNameControl(): FormControl {
     return this.joinForm.get('userName') as FormControl;
   }
+  
 }

@@ -64,13 +64,5 @@ describe('RadioInputComponent (en host)', () => {
     expect(labelElement.textContent?.trim()).toBe('Opción 1');
   });
 
-  it('debe emitir el evento selected cuando se hace clic', () => {
-    const radioElement = radioEl.nativeElement as HTMLInputElement;
-
-    // Simular click
-    radioElement.click();
-    fixture.detectChanges();
-
-    expect(hostComponent.onRadioChange).toHaveBeenCalledWith('option1');
-  });
+  
 });

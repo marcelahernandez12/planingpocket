@@ -1,0 +1,25 @@
+<form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+    <app-form-field
+        [label]="'Usuario'"
+        [placeholder]="'Nombre'"
+        [control]="adminControl" 
+        [errorMessage]="adminForm.get('userName')?.invalid && adminForm.get('userName')?.touched
+        ? (adminForm.get('userName')?.errors?.['required']
+          ? 'El nombre es obligatorio.'
+          : adminForm.get('userName')?.errors?.['minlength']
+          ? 'Mínimo 2 caracteres.'
+          : adminForm.get('userName')?.errors?.['maxlength']
+          ? 'Máximo 15 caracteres.'
+          : null)
+        : null
+        "
+    >
+    </app-form-field>
+
+    <app-role-selector
+      [selectedRole]="adminForm.value.userRole"
+      (roleChange)="onRoleChange($event)"
+    ></app-role-selector>
+
+    <app-button type="submit">Crear Usuario</app-button>
+</form>
