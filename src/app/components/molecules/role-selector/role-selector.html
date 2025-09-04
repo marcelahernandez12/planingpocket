@@ -1,0 +1,24 @@
+<div class="role-selector">
+  
+  <div class="options-container">
+    <app-radio-input
+      id="player"
+      name="role"
+      value="player"
+      [checked]="selectedRole === 'player'"
+      (selected)="onRoleChange('player')"
+    >
+      Jugador
+    </app-radio-input>
+
+    <app-radio-input
+      id="spectator"
+      name="role"
+      value="spectator"
+      [checked]="selectedRole === 'spectator'"
+      (selected)="onRoleChange('spectator')"
+    >
+      Espectador
+    </app-radio-input>
+  </div>
+</div>

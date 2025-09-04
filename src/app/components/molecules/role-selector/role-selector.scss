@@ -1,0 +1,24 @@
+.role-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.selector-label {
+  color: #FFF;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.options-container {
+  display: flex;
+  gap: 15px; 
+  align-items: center;
+  justify-content: center;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  vertical-align: middle;
+}

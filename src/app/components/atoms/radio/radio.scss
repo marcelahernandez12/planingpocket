@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  align-items: center;
+  margin-right: 15px; 
+
+  input[type="radio"] {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  label {
+    color: #FFF; 
+    cursor: pointer;
+  }
+  input{
+    width: 21px;
+    height: 21px;
+  }
+  
+
+
+}

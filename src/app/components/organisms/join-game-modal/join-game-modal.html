@@ -1,0 +1,29 @@
+<div class="modal-backdrop" (click)="closeModal()"></div>
+<div class="modal-content">
+  <form [formGroup]="joinForm" (ngSubmit)="onJoin()">
+    <app-form-field
+      [label]="'Tu nombre'"
+      [placeholder]="'Jugador 1'"
+      [control]="userNameControl"
+      [errorMessage]="joinForm.get('userName')?.invalid && joinForm.get('userName')?.touched
+        ? (joinForm.get('userName')?.errors?.['required']
+          ? 'El nombre es obligatorio.'
+          : joinForm.get('userName')?.errors?.['minlength']
+          ? 'Mínimo 2 caracteres.'
+          : joinForm.get('userName')?.errors?.['maxlength']
+          ? 'Máximo 15 caracteres.'
+          : null)
+        : null
+      "
+    ></app-form-field>
+
+    <app-role-selector
+      [selectedRole]="joinForm.value.userRole"
+      (roleChange)="onRoleChange($event)"
+    ></app-role-selector>
+
+    <div class="modal-actions">
+      <app-button type="submit">Continuar</app-button>
+    </div>
+  </form>
+</div>

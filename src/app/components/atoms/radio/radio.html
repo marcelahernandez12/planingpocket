@@ -1,0 +1,12 @@
+<label [for]="id">
+  <ng-content></ng-content>
+</label>
+<input
+  [id]="id"
+  [name]="name"
+  [value]="value"
+  [checked]="checked"
+  type="radio"
+  (change)="onChange($event)"
+/>
+ 
