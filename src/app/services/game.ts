@@ -1,21 +1,53 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs'; 
+import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators'; 
+export interface UserData {
+  name: string;
+  role: 'jugador' | 'espectador';
+  displayMode: 'jugador' | 'espectador';
+}
+
+export interface SessionData {
+  gameId: string;
+  user: UserData;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class Game {
   constructor() { }
-  createAndJoinGame(userName: string, userRole: 'player' | 'spectator'): Observable<any> {
-    console.log(`[MOCK] Creando partida para ${userName} como ${userRole}`);
 
-    const mockResponse = {
-      success: true,
-      gameId: 'partida-' + Math.random().toString(36).substring(2, 9), 
-      message: 'Partida creada y unida con éxito.',
-      userData: { name: userName, role: userRole }
+  createAndJoinGame(
+    gameName: string, 
+    userName: string, 
+    displayMode:string, 
+    userRole: string): Observable<any> {
+    
+    const userData = {
+      name: userName,
+      displayMode:displayMode,
+      role: userRole,
     };
-    localStorage.setItem('gameData', JSON.stringify(mockResponse.userData));
-    localStorage.setItem('gameId', mockResponse.gameId);
-    return of(mockResponse);
+
+    const sessionData = {
+      gameId: gameName,
+      user: userData
+    };
+
+    const mockResponse = { success: true, gameId: gameName };
+
+    return of(mockResponse).pipe(
+      tap(() => {
+        localStorage.setItem('sessionData', JSON.stringify(sessionData));
+      })
+    );
+  }
+  getSessionData(): SessionData | null {
+    const data = localStorage.getItem('sessionData');
+    return data ? JSON.parse(data) : null;
+  }
+  getUserMode(): 'jugador' | 'espectador' {
+    const session = this.getSessionData();
+    return session?.user.displayMode ?? 'jugador';
   }
 }

@@ -9,21 +9,21 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
-import { Router } from '@angular/router'; 
 import { FormUtils } from '../../../utils/form-utils';
-import { RoleSelectorComponent } from '../../molecules/role-selector/role-selector';
+
 @Component({
   selector: 'app-admin-form',
   standalone: true,
-  imports: [CommonModule, FormFieldComponent, ButtonComponent, ReactiveFormsModule, RoleSelectorComponent],
+  imports: [CommonModule, FormFieldComponent, ButtonComponent, ReactiveFormsModule],
   templateUrl: './admin-form.html'
 })
 export class AdminForm {
   @Output() formSubmit = new EventEmitter<string>();
-  adminForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.adminForm = this.fb.group({
-      userName: [
+  gameForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.gameForm = this.fb.group({
+      gameName: [
         '',
         [
           Validators.required,
@@ -31,29 +31,23 @@ export class AdminForm {
           Validators.maxLength(20),
           FormUtils.nameValidator(),
         ],
-      ],
-      userRole: ['player', Validators.required],
+      ]
     });
   }
   
-  onSubmit() {
-    if (this.adminForm.invalid) {
-      this.adminForm.markAllAsTouched();
-      return;
-    }
-    const dataUser = this.adminForm.value;
+  
 
-    const userRol = {
-      ...dataUser,
-      rol: 'propietario'
+  onSubmit() {
+    if (this.gameForm.valid) {
+      localStorage.setItem('gameName', JSON.stringify(this.gameForm.value.gameName));
+      this.formSubmit.emit(this.gameForm.value.gameName);
+      return;
+    } else {
+      this.gameForm.markAllAsTouched();
     }
-    localStorage.setItem('usuarioAdmin', JSON.stringify(userRol));
-    this.router.navigate(['/game-board']);
   }
-  onRoleChange(role: 'player' | 'spectator') {
-    this.adminForm.get('userRole')?.setValue(role);
-  }
-  get adminControl(): FormControl {
-    return this.adminForm.get('userName') as FormControl;
+
+  get gameNameControl(): FormControl {
+    return this.gameForm.get('gameName') as FormControl;
   }
 }

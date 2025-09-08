@@ -1,0 +1,9 @@
+<!-- player-card.component.html -->
+<div class="player-card"
+     [ngClass]="{
+       espectador: role === 'espectador',
+       empty: !cardSelected && role === 'jugador',
+       voted: cardSelected && role === 'jugador'
+     }">
+  <app-user-name [name]="userName"></app-user-name>
+</div>

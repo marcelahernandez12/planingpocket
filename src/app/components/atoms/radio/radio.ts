@@ -40,5 +40,6 @@ export class RadioInputComponent implements ControlValueAccessor{
     this.innerValue = val;
     this.onChange(val);
     this.onTouched();
+    this.selected.emit(val);   
   }
 }

@@ -10,10 +10,11 @@ import { RadioInputComponent } from '../../atoms/radio/radio';
   styleUrl: './role-selector.scss'
 })
 export class RoleSelectorComponent {
-  @Input() selectedRole: 'player' | 'spectator' = 'player';
-  @Output() roleChange = new EventEmitter<'player' | 'spectator'>();
+  @Input() selectedRole: 'jugador' | 'espectador' = 'jugador';
+  @Output() roleChange = new EventEmitter<'jugador' | 'espectador'>();
 
-  onRoleChange(role: 'player' | 'spectator') {
+  onRoleChange(role: 'jugador' | 'espectador') {
+    console.log('Hijo emite:', role); 
     this.selectedRole = role;
     this.roleChange.emit(this.selectedRole);
   }

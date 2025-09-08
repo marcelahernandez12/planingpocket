@@ -39,9 +39,9 @@ export class CreateGameForm {
 
   onSubmit() {
     if (this.gameForm.valid) {
+      localStorage.setItem('gameName', JSON.stringify(this.gameForm.value.gameName));
       this.formSubmit.emit(this.gameForm.value.gameName);
     } else {
-      console.log('Formulario de partida inválido.');
       this.gameForm.markAllAsTouched();
     }
   }

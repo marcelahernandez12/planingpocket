@@ -14,9 +14,9 @@ import { RadioInputComponent } from '../../atoms/radio/radio';
         <app-radio-input
           id="player"
           name="role"
-          value="player"
-          [checked]="selectedRole === 'player'"
-          (selected)="onRoleChange('player')"
+          value="jugador"
+          [checked]="selectedRole === 'jugador'"
+          (selected)="onRoleChange('jugador')"
         >
           Jugador
         </app-radio-input>
@@ -24,9 +24,9 @@ import { RadioInputComponent } from '../../atoms/radio/radio';
         <app-radio-input
           id="spectator"
           name="role"
-          value="spectator"
-          [checked]="selectedRole === 'spectator'"
-          (selected)="onRoleChange('spectator')"
+          value="espectador"
+          [checked]="selectedRole === 'espectador'"
+          (selected)="onRoleChange('espectador')"
         >
           Espectador
         </app-radio-input>
@@ -35,7 +35,7 @@ import { RadioInputComponent } from '../../atoms/radio/radio';
   `,
 })
 class TestHostComponent {
-  selectedRole: string = 'player';
+  selectedRole: string = 'jugador';
 
   onRoleChange(role: string) {
     this.selectedRole = role;
@@ -74,13 +74,13 @@ describe('RoleSelectorComponent', () => {
   });
 
   it('debe cambiar el rol a espectador cuando se selecciona esa opción', () => {
-    spectatorRadio.triggerEventHandler('selected', 'spectator');
+    spectatorRadio.triggerEventHandler('selected', 'espectador');
     
-    fixture.detectChanges(); // Actualizar la vista
+    fixture.detectChanges(); 
 
-    expect(hostComponent.onRoleChange).toHaveBeenCalledWith('spectator');
+    expect(hostComponent.onRoleChange).toHaveBeenCalledWith('espectador');
     
-    expect(hostComponent.selectedRole).toBe('spectator');
+    expect(hostComponent.selectedRole).toBe('espectador');
     
     expect(playerRadio.componentInstance.checked).toBe(false);
     expect(spectatorRadio.componentInstance.checked).toBe(true);

@@ -1,0 +1,25 @@
+.game-header{
+    display: flex;
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    padding: 20px 0; /* Un poco de padding horizontal */
+    align-items: center;
+    justify-content: space-between;
+    .header-center{
+        .game-title{
+            font-family: Poppins;
+            font-weight: 700;
+            font-style: Bold;
+            font-size: 26px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+            vertical-align: middle;
+            color: #fff;
+        }
+    }
+    .header-right{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

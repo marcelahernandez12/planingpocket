@@ -1,0 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule  } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+
+import { HeaderComponent } from '../../organisms/header/header';
+import { BoardComponent } from '../../organisms/board/board';
+
+@Component({
+  selector: 'app-game-board',
+  standalone: true,
+  imports: [CommonModule, HeaderComponent, BoardComponent],
+  templateUrl: './game-board.html',
+  styleUrl: './game-board.scss'
+})
+export class GameBoard implements OnInit {
+  gameName: string = '';
+  userName: string = '';
+  userRole: 'jugador' | 'espectador' = 'jugador';
+  displayMode: string = '';
+  gameId: string | null = null;
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+     this.gameId = this.route.snapshot.paramMap.get('id');
+
+    const sessionData = localStorage.getItem('sessionData');
+    if (sessionData) {
+      const data = JSON.parse(sessionData);
+      
+      this.gameName = data.gameId;
+      this.userName = data.user.name;
+      this.userRole = data.user.role === 'espectador' ? 'espectador' : 'jugador';
+      this.displayMode = data.user.displayMode;
+    }
+  }
+}

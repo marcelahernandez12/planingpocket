@@ -1,25 +1,27 @@
-<form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
-    <app-form-field
-        [label]="'Usuario'"
-        [placeholder]="'Nombre'"
-        [control]="adminControl" 
-        [errorMessage]="adminForm.get('userName')?.invalid && adminForm.get('userName')?.touched
-        ? (adminForm.get('userName')?.errors?.['required']
-          ? 'El nombre es obligatorio.'
-          : adminForm.get('userName')?.errors?.['minlength']
-          ? 'Mínimo 2 caracteres.'
-          : adminForm.get('userName')?.errors?.['maxlength']
-          ? 'Máximo 15 caracteres.'
-          : null)
-        : null
-        "
-    >
-    </app-form-field>
+<form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+  <app-form-field
+    [label]="'Nombre la partida'"
+    [placeholder]="'Sprint 32'"
+    [control]="gameNameControl" 
+    [errorMessage]="
+  gameNameControl.invalid && (gameNameControl.touched || gameNameControl.dirty)
+    ? (gameNameControl.errors?.['required']
+      ? 'El nombre es obligatorio.'
+      : gameNameControl.errors?.['minlength']
+      ? 'Mínimo 5 caracteres.'
+      : gameNameControl.errors?.['maxlength']
+      ? 'Máximo 20 caracteres.'
+      : gameNameControl.errors?.['specialChars']
+      ? 'No puede contener caracteres especiales (_*#/-).'
+      : gameNameControl.errors?.['maxNumbers']
+      ? 'Máximo 3 números.'
+      : gameNameControl.errors?.['onlyNumbers']
+      ? 'No puede contener solo números.'
+      : null)
+    : null
+"
+  >
+  </app-form-field>
 
-    <app-role-selector
-      [selectedRole]="adminForm.value.userRole"
-      (roleChange)="onRoleChange($event)"
-    ></app-role-selector>
-
-    <app-button type="submit">Crear Usuario</app-button>
+  <app-button type="submit">Crear partida</app-button>
 </form>

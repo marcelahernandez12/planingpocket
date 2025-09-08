@@ -1,5 +1,5 @@
-<div class="modal-backdrop" (click)="closeModal()"></div>
-<div class="modal-content">
+
+
   <form [formGroup]="joinForm" (ngSubmit)="onJoin()">
     <app-form-field
       [label]="'Tu nombre'"
@@ -18,12 +18,11 @@
     ></app-form-field>
 
     <app-role-selector
-      [selectedRole]="joinForm.value.userRole"
-      (roleChange)="onRoleChange($event)"
-    ></app-role-selector>
+      [selectedRole]="joinForm.get('displayMode')?.value"
+      (roleChange)="onRoleChange($event)">
+    </app-role-selector>
 
     <div class="modal-actions">
       <app-button type="submit">Continuar</app-button>
     </div>
   </form>
-</div>

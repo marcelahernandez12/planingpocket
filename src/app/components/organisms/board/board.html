@@ -1,0 +1,30 @@
+<main class="game-main">
+  <div class="playing-area-container">
+    <div class="playing-area"></div>
+      <div class="players-container">
+          <ng-container *ngIf="displayMode === 'jugador'; else spectatorTemplate">
+            <app-player-card
+              class="player-card current-player"
+              [userName]="userName"
+              [role]="displayMode"
+              [cardSelected]="null">
+            </app-player-card>
+          </ng-container>
+
+        <!-- Espectador actual -->
+        <ng-template #spectatorTemplate>
+          <div class="player-card current-player spectator-card">
+            <app-user-info [userName]="userName"></app-user-info>
+          </div>
+        </ng-template>
+        <app-player-card *ngFor="let user of connectedUsers; let i = index"
+          class="player-card"
+          [ngClass]="'player-' + (i + 1)"
+          [userName]="user.name"
+          [role]="user.role"
+          [cardSelected]="user.cardSelected">
+        </app-player-card>
+    </div>
+  </div>
+  
+</main>
