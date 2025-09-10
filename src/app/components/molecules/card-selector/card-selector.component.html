@@ -1,0 +1,17 @@
+<div class="card-selector">
+  <p class="title">Elige una carta 👇</p>
+
+  <div class="cards" *ngIf="cards.length > 0; else noCards">
+    @for (card of cards; track $index) {
+      <app-card-button
+        [value]="card"
+        [selected]="card === selectedCard"
+        (click)="onSelect(card)">
+      </app-card-button>
+    }
+  </div>
+
+  <ng-template #noCards>
+    <p class="no-cards">No hay cartas registradas</p>
+  </ng-template>
+</div>

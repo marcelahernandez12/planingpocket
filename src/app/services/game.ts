@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject  } from 'rxjs';
 import { tap } from 'rxjs/operators'; 
 export interface UserData {
   name: string;
@@ -15,6 +15,9 @@ export interface SessionData {
   providedIn: 'root'
 })
 export class Game {
+
+  private cardSelectedSource = new Subject<{ userName: string; card: number | string }>();
+  cardSelected$ = this.cardSelectedSource.asObservable();
   constructor() { }
 
   createAndJoinGame(
@@ -49,5 +52,11 @@ export class Game {
   getUserMode(): 'jugador' | 'espectador' {
     const session = this.getSessionData();
     return session?.user.displayMode ?? 'jugador';
+  }
+  getAvailableCards(): (number | string)[] {
+    return [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, '?'];
+  }
+  notifyCardSelection(userName: string, card: number | string) {
+    this.cardSelectedSource.next({ userName, card });
   }
 }

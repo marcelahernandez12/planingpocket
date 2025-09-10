@@ -12,5 +12,5 @@ export class PlayerCardComponent {
   @Input() userName: string = '';
   @Input() userInitials: string = '';
   @Input() role: 'jugador' | 'espectador' = 'jugador';
-  @Input() cardSelected: number | null = null;
+  @Input() cardSelected: string | number | null = null;
 }

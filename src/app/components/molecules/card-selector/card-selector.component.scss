@@ -1,0 +1,25 @@
+.card-selector {
+  text-align: center;
+  margin-top: 2rem;
+  position: absolute;
+  bottom: -143px;
+  width: 100%;
+  .title {
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 21px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+  }
+
+  .cards {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    
+  }
+}

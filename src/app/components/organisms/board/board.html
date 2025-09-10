@@ -2,19 +2,23 @@
   <div class="playing-area-container">
     <div class="playing-area"></div>
       <div class="players-container">
-          <ng-container *ngIf="displayMode === 'jugador'; else spectatorTemplate">
-            <app-player-card
-              class="player-card current-player"
-              [userName]="userName"
-              [role]="displayMode"
-              [cardSelected]="null">
-            </app-player-card>
-          </ng-container>
+        <ng-container *ngIf="displayMode === 'jugador'; else spectatorTemplate">
+          <app-player-card
+            class="player-card current-player"
+            [userName]="currentUser.name"
+            [role]="currentUser.role"
+            [cardSelected]="currentUser.cardSelected">
+          </app-player-card>
 
-        <!-- Espectador actual -->
+          <app-card-selector  
+            [cards]="cards"
+            [selectedCard]="currentUser.cardSelected"
+            (cardSelected)="handleCardSelection($event)">
+          </app-card-selector>
+        </ng-container>
         <ng-template #spectatorTemplate>
           <div class="player-card current-player spectator-card">
-            <app-user-info [userName]="userName"></app-user-info>
+            <app-user-info [userName]="currentUser.name"></app-user-info>
           </div>
         </ng-template>
         <app-player-card *ngFor="let user of connectedUsers; let i = index"
