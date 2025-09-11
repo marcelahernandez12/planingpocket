@@ -94,4 +94,11 @@ export class BoardComponent {
     );
     return jugadores.every(u => u.cardSelected !== null);
   }
+  reset() {
+    this.currentUser.cardSelected = null;
+    this.connectedUsers = this.gameService.resetGame(this.connectedUsers);
+
+    this.voteSummary = [];
+    this.average = 0;
+  }
 }

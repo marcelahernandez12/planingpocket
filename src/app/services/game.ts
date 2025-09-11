@@ -91,4 +91,12 @@ export class Game {
     const average = validVotes > 0 ? total / validVotes : 0;
     return { counts, average };
   }
+
+  resetGame(players: Player[]): Player[] {
+    this.revealed = false;
+    return players.map(player => ({
+      ...player,
+      cardSelected: null
+    }));
+  }
 }

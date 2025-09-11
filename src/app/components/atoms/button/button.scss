@@ -15,7 +15,10 @@ button
     margin: auto;
     width: auto;
     display: flex;
-    &.reveal-cards{
+    &.reveal-cards, 
+    &.reset-cards{
+        background-color: #6429CD;
+        border-color: none;
         position: absolute;
         top: 50%;
         left: 50%;

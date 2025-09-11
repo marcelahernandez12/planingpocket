@@ -3,8 +3,17 @@
     <div class="playing-area">
       
     </div>
-    <app-button *ngIf="userRole === 'propietario' && allPlayersHaveVoted"  [className]="'reveal-cards'" (click)="reveal()">
+    <app-button 
+      *ngIf="userRole === 'propietario' && allPlayersHaveVoted && !areCardsRevealed"  
+      [className]="'reveal-cards'" 
+      (click)="reveal()">
         Revelar cartas
+    </app-button>
+    <app-button 
+      *ngIf="userRole === 'propietario' && areCardsRevealed" 
+      [className]="'reset-cards'" 
+      (click)="reset()">
+      Nueva votación
     </app-button>
     <div class="players-container">
       <ng-container *ngIf="displayMode === 'jugador'; else spectatorTemplate">

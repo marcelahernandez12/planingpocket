@@ -11,10 +11,12 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 287px;
-        height: 126px;
-        border-radius: 50%;
-        border: 2px solid #8b5cf6;
+        width: 521px;
+        height: 267px;
+        border-radius: 276px;
+        border: 1px solid #6429CD;
+        box-shadow: 0px 3px 6px 0px #0000000F;
+        box-shadow: 0px 4px 4px 0px #0000000F;
         transform: translate(-50%, -50%);
         }
 
@@ -22,21 +24,23 @@
         .playing-area::after {
         content: "";
         position: absolute;
-        border-radius: 50%;
-        border: 2px solid #8b5cf6;
+        border-radius: 276px;
+        border: 2px solid #6429CD;
+        box-shadow: 0px 0px 20px 0px #BDBDFF99 inset;
+        box-shadow: 0px 12px 24px 0px #6429CD99;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         }
 
         .playing-area::before {
-        width: 355px;
-        height: 200px;
+        width: 555px;
+        height: 298px;
         }
 
         .playing-area::after {
-        width: 438px;
-        height: 282px;
+        width: 603px;
+        height: 345px;
         }
 
         .players-container {
@@ -119,18 +123,18 @@
         }
 
         .current-player {
-          bottom: -14px;
+          bottom: -57px;
           left: 50%;
           transform: translateX(-50%);
         }
 
 
-        .player-1 { top: 41px; left: 20%; }  
-        .player-2 { top: 7px; left: 50%; transform: translateX(-50%); } 
-        .player-3 { top: 41px; right: 20%; }  
+        .player-1 { top: 25px; left: 10%; }  
+        .player-2 { top: -34px; left: 50%; transform: translateX(-50%); } 
+        .player-3 { top: 1px; right: 9%; }  
         .player-4 { right: -40px; top: 40%; }  
-        .player-5 { bottom: 10px; right: 20%; } 
-        .player-6 { bottom: 10px; left: 20%; }  
+        .player-5 { bottom: -23px; right: 8%; } 
+        .player-6 { bottom: -23px; left: 9%; }  
         .player-7 { left: -40px; top: 40%; }   
 
     }
