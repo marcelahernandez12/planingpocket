@@ -24,7 +24,7 @@ export class JoinGameModalComponent {
   @Output() formSubmit = new EventEmitter<string>();
   joinForm: FormGroup;
   @Output() close = new EventEmitter<void>();
-  @Input() userRole: string = 'jugador';
+  @Input() userRole: 'jugador' | 'propietario' = 'jugador';
   constructor(
     private fb: FormBuilder, 
     private gameService: Game, 
@@ -35,10 +35,8 @@ export class JoinGameModalComponent {
     });
   }
 
-  onRoleChange(role: 'jugador' | 'espectador') {
-    this.joinForm.get('displayMode')?.setValue(role);
-    console.log('Padre recibió:', role);
-    console.log('FormControl ahora:', this.joinForm.get('displayMode')?.value);
+  onRoleChange(displayMode: 'jugador' | 'espectador') {
+    this.joinForm.get('displayMode')?.setValue(displayMode);
   }
 
   onJoin() {
@@ -46,7 +44,7 @@ export class JoinGameModalComponent {
       const userName = this.joinForm.value.userName;
       const displayMode = this.joinForm.value.displayMode;
       const gameName = JSON.parse(localStorage.getItem('gameName') || '""');
-       this.gameService.createAndJoinGame(gameName, userName, displayMode, this.userRole)
+      this.gameService.createAndJoinGame(gameName, userName, displayMode, this.userRole)
         .subscribe(response => {
           if (response.success) {
             this.close.emit();

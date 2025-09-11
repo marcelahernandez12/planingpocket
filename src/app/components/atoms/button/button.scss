@@ -1,4 +1,6 @@
-.invite-button{
+.invite-button,
+button
+{
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid #F6F7FC;
     border-radius: 50px;
@@ -10,4 +12,15 @@
     line-height: 140%;
     text-align: center;
     cursor: pointer;
+    margin: auto;
+    width: auto;
+    display: flex;
+    &.reveal-cards{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -16px;
+        margin-left: -72px;
+        z-index: 99999;
+    }
 }

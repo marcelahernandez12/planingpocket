@@ -1,9 +1,25 @@
-<!-- player-card.component.html -->
-<div class="player-card"
+<!-- Si es jugador -->
+<div *ngIf="displayMode === 'jugador'; else spectatorTemplate"
+     class="player-card"
      [ngClass]="{
-       espectador: role === 'espectador',
-       empty: !cardSelected && role === 'jugador',
-       voted: cardSelected && role === 'jugador'
+       empty: !cardSelected,
+       voted: cardSelected
      }">
+
+  <div class="poker-card"
+       [ngClass]="{ empty: !cardSelected }">
+    {{ areCardsRevealed ? cardSelected : '' }}
+  </div>
+
   <app-user-name [name]="userName"></app-user-name>
 </div>
+
+<!-- Si es espectador -->
+<ng-template #spectatorTemplate>
+  <div class="player-card spectator-card">
+    <div class="poker-card spectator">
+      {{ userInitials }}
+    </div>
+    
+  </div>
+</ng-template>

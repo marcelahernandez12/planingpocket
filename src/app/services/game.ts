@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject  } from 'rxjs';
 import { tap } from 'rxjs/operators'; 
+import { Player } from '../utils/interfaces/interfaces';
 export interface UserData {
   name: string;
-  role: 'jugador' | 'espectador';
+  role: 'jugador' | 'propietario';
   displayMode: 'jugador' | 'espectador';
 }
 
@@ -17,6 +18,7 @@ export interface SessionData {
 export class Game {
 
   private cardSelectedSource = new Subject<{ userName: string; card: number | string }>();
+  private revealed = false;
   cardSelected$ = this.cardSelectedSource.asObservable();
   constructor() { }
 
@@ -53,10 +55,40 @@ export class Game {
     const session = this.getSessionData();
     return session?.user.displayMode ?? 'jugador';
   }
+
+  getUserRole(): 'jugador' | 'propietario' {
+    const session = this.getSessionData();
+    return session?.user.role ?? 'jugador';
+  }
   getAvailableCards(): (number | string)[] {
     return [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, '?'];
   }
   notifyCardSelection(userName: string, card: number | string) {
     this.cardSelectedSource.next({ userName, card });
+  }
+  revealCards() {
+    this.revealed = true;
+  }
+  areCardsRevealed(): boolean {
+    return this.revealed;
+  }
+
+  getVoteSummary(players: Player[]): { counts: Map<number|string, number>, average: number } {
+    const counts = new Map<number|string, number>();
+    let total = 0;
+    let validVotes = 0;
+
+    players.forEach(player => {
+      if (player.displayMode === 'jugador' && player.cardSelected !== null) {
+        counts.set(player.cardSelected, (counts.get(player.cardSelected) || 0) + 1);
+        if (typeof player.cardSelected === 'number') {
+          total += player.cardSelected;
+          validVotes++;
+        }
+      }
+    });
+
+    const average = validVotes > 0 ? total / validVotes : 0;
+    return { counts, average };
   }
 }

@@ -15,8 +15,8 @@ import { BoardComponent } from '../../organisms/board/board';
 export class GameBoard implements OnInit {
   gameName: string = '';
   userName: string = '';
-  userRole: 'jugador' | 'espectador' = 'jugador';
-  displayMode: string = '';
+  userRole: 'jugador' | 'propietario' = 'jugador';
+  displayMode: 'jugador' | 'espectador' = 'jugador';
   gameId: string | null = null;
 
   constructor(private route: ActivatedRoute) { }
@@ -30,8 +30,8 @@ export class GameBoard implements OnInit {
       
       this.gameName = data.gameId;
       this.userName = data.user.name;
-      this.userRole = data.user.role === 'espectador' ? 'espectador' : 'jugador';
-      this.displayMode = data.user.displayMode;
+      this.userRole = data.user.userRole;
+      this.displayMode = data.user.displayMode === 'espectador' ? 'espectador' : 'jugador';
     }
   }
 }

@@ -29,15 +29,15 @@ describe('PlayerCardComponent (Jest)', () => {
   });
 
   it('should have "espectador" class when role is espectador', () => {
-    component.role = 'espectador';
+    component.displayMode = 'espectador';
     fixture.detectChanges();
 
     const cardEl = fixture.debugElement.query(By.css('.player-card')).nativeElement;
-    expect(cardEl.classList).toContain('espectador');
+    expect(cardEl.classList).toContain('spectator-card');
   });
 
   it('should have "empty" class when jugador without cardSelected', () => {
-    component.role = 'jugador';
+    component.displayMode = 'jugador';
     component.cardSelected = null;
     fixture.detectChanges();
 
@@ -46,7 +46,7 @@ describe('PlayerCardComponent (Jest)', () => {
   });
 
   it('should have "voted" class when jugador with cardSelected', () => {
-    component.role = 'jugador';
+    component.displayMode = 'jugador';
     component.cardSelected = 5;
     fixture.detectChanges();
 

@@ -2,43 +2,71 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 35px;
-  height: 60px;
-  opacity: 1;
-  border-radius: 7px;
-  border-width: 1px;
-  border: 1px solid #BB65FF;
-  box-shadow: 0px 0px 6px 0px #BDBDFF99 inset;
-}
-.poker-card {
-  margin-top: 8px;
   width: 60px;
-  height: 80px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  border: 2px solid #7c3aed;
-  background: white;
-  color: #000;
-}
+  height: auto; 
+  opacity: 1;
+  &.voted .poker-card {
+    width: 35px;
+    height: 60px;
+    top: 669px;
+    left: 556px;
+    opacity: 1;
+    border-radius: 7px;
+    border-width: 1px;
+    background: #BB65FF;
+    border: 1px solid #BB65FF;
+    font-family: Poppins;
+    font-style: Bold;
+    font-size: 14px;
+    color: #fff;
+  }
+  .poker-card {
+    margin-top: 8px;
+    width: 36.33px;
+    height: 61.3px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    border: 2px solid #BB65FF;
+    background: white;
+    color: #000;
+    box-shadow: 0px 0px 6px 0px #BDBDFF99 inset;
 
-.poker-card.empty {
-  background: transparent;
-  border: 2px dashed #7c3aed;
-  color: transparent;
-}
-.player-card.voted {
-  background: #BB65FF;
-}
-.poker-card.spectator {
-  background: repeating-linear-gradient(
-    45deg,
-    #7c3aed,
-    #7c3aed 10px,
-    #4c1d95 10px,
-    #4c1d95 20px
-  );
-  color: white;
+    &.empty {
+      background: transparent;
+      
+      color: transparent;
+    }
+
+    &.spectator {
+         width: 56px;
+        height: 56px;
+        opacity: 1;
+        border-radius: 32px;
+        background-color: #BDBDFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        cursor: pointer;
+        font-family: Poppins;
+        font-weight: 700;
+        font-size: 21px;
+        color:  #330072;
+
+
+    }
+  }
+
+  
+
+  .player-name {
+    margin-top: 6px;
+    font-size: 14px;
+    color: white; 
+    text-align: center;
+  }
 }

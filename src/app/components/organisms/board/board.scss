@@ -40,11 +40,72 @@
         }
 
         .players-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          .results{
+            position: absolute;
+            bottom: -196px;
+            width: auto;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .average{
+              color: #ffff;
+              font-family: Poppins;
+              font-weight: 400;
+              font-style: Regular;
+              font-size: 16px;
+             
+
+              span{
+                font-weight: Bold;
+                font-size: 36px;
+              }
+            }
+            .results-cards{
+              display: flex;
+              flex-direction: row;
+              .result-card{
+                width: 50px;
+                height: 111px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 20px;
+                .card-value{
+                  width: 50px;
+                  height: 85px;
+                  opacity: 1;
+                  border-radius: 7px;
+                  border-width: 1px;
+                  border: 1px solid #6429CD;
+                  font-family: Poppins;
+                  font-weight: 700;
+                  font-size: 21px;
+                  text-align: center;
+                  color: #fff;
+                  align-items: center;
+                  display: flex;
+                  justify-content: center;
+                }
+                .card-votes{
+                  font-family: Poppins;
+                  font-weight: 400;
+                  font-size: 16px;
+                  
+                  line-height: 140%;
+                  letter-spacing: 0%;
+                  text-align: center;
+                  vertical-align: middle;
+                  color: #fff;
+                }
+              }
+            }
+          }
         }
 
         .player-card {
@@ -57,9 +118,8 @@
           color: white;
         }
 
-        /* Jugador actual (abajo centrado) */
         .current-player {
-          bottom: 23px;
+          bottom: -14px;
           left: 50%;
           transform: translateX(-50%);
         }
@@ -69,12 +129,11 @@
         .player-2 { top: 7px; left: 50%; transform: translateX(-50%); } 
         .player-3 { top: 41px; right: 20%; }  
         .player-4 { right: -40px; top: 40%; }  
-        .player-5 { bottom: 40px; right: 20%; } 
-        .player-6 { bottom: 40px; left: 20%; }  
+        .player-5 { bottom: 10px; right: 20%; } 
+        .player-6 { bottom: 10px; left: 20%; }  
         .player-7 { left: -40px; top: 40%; }   
 
     }
-
-
+   
 }
 

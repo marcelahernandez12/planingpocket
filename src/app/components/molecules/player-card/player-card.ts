@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class PlayerCardComponent {
   @Input() userName: string = '';
   @Input() userInitials: string = '';
-  @Input() role: 'jugador' | 'espectador' = 'jugador';
+  @Input() displayMode: 'jugador' | 'espectador' = 'jugador';
   @Input() cardSelected: string | number | null = null;
+  @Input() areCardsRevealed: boolean = false;
 }

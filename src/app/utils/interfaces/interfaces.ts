@@ -1,7 +1,8 @@
 export interface Player {
   name: string;
   initials: string;
-  role: 'jugador' | 'espectador';
+  displayMode: 'jugador' | 'espectador';
+  role: 'propietario' | 'jugador';
   cardSelected: string | number | null;
 }
 
