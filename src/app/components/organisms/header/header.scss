@@ -1,7 +1,7 @@
 .game-header{
     display: flex;
-    width: 100%; /* Asegura que ocupe todo el ancho */
-    padding: 20px 0; /* Un poco de padding horizontal */
+    width: 100%; 
+    padding: 20px 0;
     align-items: center;
     justify-content: space-between;
     .header-center{
@@ -23,3 +23,43 @@
         align-items: center;
     }
 }
+.header-title-modal{
+    background: #6429CD;
+    font-family: Poppins;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: #fff;
+    padding: 10px 29px;
+    width: 90%;
+    margin: 0px;
+    -webkit-border-radius: 12px 12px 0 0;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    img{
+        cursor: pointer;
+    }
+}
+.container-modal{
+    height: 190px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .invite-link{
+        padding: 10px;
+        border: 1px solid #6429CD;
+        border-radius: 100px;
+        background:#6429CD14;
+        width: 90%;
+        font-family: Poppins;
+        font-weight: 400;
+        font-size: 14px;
+        color: #fff;
+        margin-bottom: 40px;
+    }
+}
+

@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 export class ModalContainerComponent {
   @Input() show: boolean = false;
   @Output() close = new EventEmitter<void>();
-
+  @Input() modalClass = '';
   onClose() {
     this.close.emit();
   }

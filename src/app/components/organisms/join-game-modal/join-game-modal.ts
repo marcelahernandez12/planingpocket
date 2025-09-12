@@ -48,7 +48,12 @@ export class JoinGameModalComponent {
         .subscribe(response => {
           if (response.success) {
             this.close.emit();
-            this.router.navigate(['/game-board', response.gameId]);
+            const normalizedId = decodeURIComponent(response.gameId)
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9\-]/g, '');
+            this.router.navigate(['/game-board', normalizedId]);
           }
         });
     

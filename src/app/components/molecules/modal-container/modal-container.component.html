@@ -1,4 +1,4 @@
 <div class="modal-backdrop" *ngIf="show" (click)="onClose()"></div>
-<div class="modal-content-wrapper" *ngIf="show">
+<div class="modal-content-wrapper" *ngIf="show" [ngClass]="modalClass">
   <ng-content></ng-content>
 </div>

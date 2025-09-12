@@ -7,6 +7,20 @@
   </div>
   <div class="header-right">
     <app-user-info [userName]="userName"></app-user-info>
-    <app-button  [className]="'invite-button'">Invitar jugadores</app-button>
+    <app-button  [className]="'invite-button'" (click)="openInviteModal()">Invitar jugadores</app-button>
   </div>
 </header>
+
+<app-modal-container 
+  [show]="isInviteModalOpen" 
+  (close)="closeInviteModal()"
+  [modalClass]="'invite-modal'"
+  >
+  <h2 class="header-title-modal">Invitar Jugadores <img src="assets/images/x.png" alt="Cerrar Modal" (click)="closeInviteModal()" /></h2>
+  <div class="container-modal">
+      <input type="text" [value]="inviteLink" readonly class="invite-link"/>
+      <app-button [className]="'copy-button'" (click)="copyInviteLink()">Copiar Link</app-button>
+  </div>
+  
+  
+</app-modal-container>

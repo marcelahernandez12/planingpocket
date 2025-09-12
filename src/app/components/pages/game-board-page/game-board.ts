@@ -23,11 +23,10 @@ export class GameBoard implements OnInit {
 
   ngOnInit(): void {
      this.gameId = this.route.snapshot.paramMap.get('id');
-
+    
     const sessionData = localStorage.getItem('sessionData');
     if (sessionData) {
       const data = JSON.parse(sessionData);
-      
       this.gameName = data.gameId;
       this.userName = data.user.name;
       this.userRole = data.user.userRole;
