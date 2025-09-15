@@ -20,7 +20,9 @@ export class GameBoard implements OnInit {
   gameId: string | null = null;
 
   constructor(private route: ActivatedRoute) { }
-
+  onDisplayModeChange(newMode: 'jugador' | 'espectador') {
+    this.displayMode = newMode;
+  }
   ngOnInit(): void {
      this.gameId = this.route.snapshot.paramMap.get('id');
     

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserInfoComponent } from '../../molecules/user-info/user-info';
 import { PlayerCardComponent } from '../../molecules/player-card/player-card';
@@ -14,7 +14,7 @@ import { ButtonComponent } from '../../atoms/button/button';
   templateUrl: './board.html',
   styleUrls: ['./board.scss']
 })
-export class BoardComponent {
+export class BoardComponent implements OnChanges {
   @Input() userName: string = '';
   @Input() userRole: 'jugador' | 'propietario' = 'jugador';
   @Input() displayMode: 'jugador' | 'espectador' = 'jugador';
@@ -22,8 +22,8 @@ export class BoardComponent {
   currentUser!: Player;
   connectedUsers: Player[] = [];
   cards: (number | string)[] = []; 
-  constructor(private gameService: Game) {}
-
+  constructor(private gameService: Game, private cd: ChangeDetectorRef) {}
+  
   ngOnInit(): void {
     this.displayMode = this.gameService.getUserMode();
     this.userRole = this.gameService.getUserRole();
@@ -58,7 +58,16 @@ export class BoardComponent {
       }
     });
   }
-
+   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['displayMode'] && this.currentUser) {
+      this.currentUser.displayMode = this.displayMode;
+      this.cd.detectChanges();
+    }
+    if (changes['userRole'] && this.currentUser) {
+      this.currentUser.role = this.userRole;
+      this.cd.detectChanges();
+    }
+  }
   handleCardSelection(card: number | string) {
       if (this.displayMode === 'jugador') {
         this.currentUser.cardSelected = card;

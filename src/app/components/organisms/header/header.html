@@ -6,7 +6,7 @@
     <h1 class="game-title">{{ gameName }}</h1>
   </div>
   <div class="header-right">
-    <app-user-info [userName]="userName"></app-user-info>
+    <app-user-info [userName]="userName" (click)="openUserSettingsModal()" ></app-user-info>
     <app-button  [className]="'invite-button'" (click)="openInviteModal()">Invitar jugadores</app-button>
   </div>
 </header>
@@ -21,6 +21,17 @@
       <input type="text" [value]="inviteLink" readonly class="invite-link"/>
       <app-button [className]="'copy-button'" (click)="copyInviteLink()">Copiar Link</app-button>
   </div>
-  
-  
+</app-modal-container>
+
+<app-modal-container 
+  [show]="isUserSettingsModalOpen" 
+  (close)="closeUserSettingsModal()"
+  [modalClass]="'user-settings-modal'">
+  <app-join-game-modal
+    [userRole]="userRole"
+    [displayMode]="displayMode"
+    [userName]="userName"
+    (displayModeChange)="onDisplayModeChange($event)"
+    (close)="closeUserSettingsModal()">
+  </app-join-game-modal>
 </app-modal-container>

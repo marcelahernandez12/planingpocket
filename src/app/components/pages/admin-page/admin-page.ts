@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common'; 
 import { AdminForm } from '../../organisms/admin-form/admin-form';
@@ -12,8 +12,13 @@ import { JoinGameModalComponent } from '../../organisms/join-game-modal/join-gam
   imports: [CommonModule, AdminForm, ModalContainerComponent, JoinGameModalComponent],
   templateUrl: './admin-page.html'
 })
-export class AdminPage {
+export class AdminPage implements OnInit{
   isModalOpen = false;
 
   constructor() { }
+
+  ngOnInit(): void {
+     localStorage.removeItem('sessionData');
+    localStorage.removeItem('gameName');
+  }
 }   

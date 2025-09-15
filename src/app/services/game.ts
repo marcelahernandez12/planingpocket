@@ -73,22 +73,26 @@ export class Game {
     return this.revealed;
   }
 
-  getVoteSummary(players: Player[]): { counts: Map<number|string, number>, average: number } {
-    const counts = new Map<number|string, number>();
-    let total = 0;
-    let validVotes = 0;
+  getVoteSummary(players: Player[]): { counts: Map<number | string, number>, average: number } {
+    const counts = new Map<number | string, number>();
+    const numericVotes: number[] = [];
 
     players.forEach(player => {
       if (player.displayMode === 'jugador' && player.cardSelected !== null) {
+        // contar cada voto
         counts.set(player.cardSelected, (counts.get(player.cardSelected) || 0) + 1);
+
+        // solo los números entran en el promedio
         if (typeof player.cardSelected === 'number') {
-          total += player.cardSelected;
-          validVotes++;
+          numericVotes.push(player.cardSelected);
         }
       }
     });
 
-    const average = validVotes > 0 ? total / validVotes : 0;
+    const average = numericVotes.length > 0
+      ? numericVotes.reduce((acc, val) => acc + val, 0) / numericVotes.length
+      : 0;
+
     return { counts, average };
   }
 

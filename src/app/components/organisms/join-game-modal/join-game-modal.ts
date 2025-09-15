@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormFieldComponent } from '../../molecules/form-field/form-field';
 import { RoleSelectorComponent } from '../../molecules/role-selector/role-selector';
@@ -20,47 +20,76 @@ import {
   templateUrl: './join-game-modal.html',
   styleUrl: './join-game-modal.scss'
 })
-export class JoinGameModalComponent {
+export class JoinGameModalComponent implements OnChanges{
   @Output() formSubmit = new EventEmitter<string>();
   joinForm: FormGroup;
   @Output() close = new EventEmitter<void>();
+  @Input() userName: string = '';
   @Input() userRole: 'jugador' | 'propietario' = 'jugador';
+  @Input() displayMode: 'jugador' | 'espectador' = 'jugador';
+  @Output() displayModeChange = new EventEmitter<'jugador' | 'espectador'>();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['displayMode'] && this.joinForm) {
+      this.joinForm.get('displayMode')?.setValue(this.displayMode);
+    }
+    if (changes['userName'] && this.joinForm) {
+      this.joinForm.get('userName')?.setValue(this.userName);
+    }
+  }
   constructor(
     private fb: FormBuilder, 
     private gameService: Game, 
     private router: Router) {
     this.joinForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
-      displayMode: ['jugador', Validators.required],
+      displayMode: [this.displayMode, Validators.required],
     });
   }
 
   onRoleChange(displayMode: 'jugador' | 'espectador') {
-    this.joinForm.get('displayMode')?.setValue(displayMode);
-  }
+  this.joinForm.get('displayMode')?.setValue(displayMode);
+  this.displayModeChange.emit(displayMode); 
+}
 
-  onJoin() {
-    if (this.joinForm.valid) {
-      const userName = this.joinForm.value.userName;
-      const displayMode = this.joinForm.value.displayMode;
+ onJoin() {
+  if (this.joinForm.valid) {
+    const userName = this.joinForm.value.userName;
+    const displayMode = this.joinForm.value.displayMode;
+    const sessionData = JSON.parse(localStorage.getItem('sessionData') || 'null');
+    if (sessionData?.user) {
+      const updatedSession = {
+        ...sessionData,
+        user: {
+          ...sessionData.user,
+          name: userName,
+          displayMode: displayMode,
+          role: sessionData.user.role
+        }
+      };
+
+      localStorage.setItem('sessionData', JSON.stringify(updatedSession));
+      this.close.emit();
+    } else {
       const gameName = JSON.parse(localStorage.getItem('gameName') || '""');
       this.gameService.createAndJoinGame(gameName, userName, displayMode, this.userRole)
         .subscribe(response => {
           if (response.success) {
             this.close.emit();
             const normalizedId = decodeURIComponent(response.gameId)
-            .trim()
-            .toLowerCase()
-            .replace(/\s+/g, '-')
-            .replace(/[^a-z0-9\-]/g, '');
+              .trim()
+              .toLowerCase()
+              .replace(/\s+/g, '-')
+              .replace(/[^a-z0-9\-]/g, '');
             this.router.navigate(['/game-board', normalizedId]);
           }
         });
-    
-    } else {
-      this.joinForm.markAllAsTouched();
     }
+  } else {
+    this.joinForm.markAllAsTouched();
   }
+
+}
+
 
   closeModal() {
     this.close.emit();
