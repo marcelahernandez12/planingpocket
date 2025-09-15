@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserInfoComponent } from '../../molecules/user-info/user-info';
 import { PlayerCardComponent } from '../../molecules/player-card/player-card';
@@ -16,9 +16,9 @@ import { ButtonComponent } from '../../atoms/button/button';
 })
 export class BoardComponent implements OnChanges {
   @Input() userName: string = '';
-  @Input() userRole: 'jugador' | 'propietario' = 'jugador';
+  @Input() userRole: 'jugador' | 'administrador' = 'jugador';
   @Input() displayMode: 'jugador' | 'espectador' = 'jugador';
-
+  @Output() displayModeChange = new EventEmitter<'jugador' | 'espectador'>();
   currentUser!: Player;
   connectedUsers: Player[] = [];
   cards: (number | string)[] = []; 
@@ -34,16 +34,17 @@ export class BoardComponent implements OnChanges {
       initials: this.userName.charAt(0).toUpperCase(),
       role: this.userRole,
       displayMode:this.displayMode,
-      cardSelected: null
+      cardSelected: null,
+      isOwner:true
     };
     const mockOtherUsers : Player[]  = [
-      { name: 'Oscar', initials: 'OS', displayMode:'espectador', role: 'jugador', cardSelected: null},
-      { name: 'David', initials: 'DA', displayMode:'jugador', role: 'jugador', cardSelected: 5 },
-      { name: 'Albert', initials: 'AL', displayMode:'jugador', role: 'jugador', cardSelected: 3 },
-      { name: 'Pedro', initials: 'PE', displayMode:'jugador', role: 'jugador', cardSelected: 1 },
-      { name: 'Nata', initials: 'NA', displayMode:'jugador', role: 'jugador', cardSelected: 8 },
-      { name: 'Andrea', initials: 'AN', displayMode:'jugador', role: 'jugador', cardSelected: 3 },
-      { name: 'Henry', initials: 'He', displayMode:'jugador', role: 'jugador', cardSelected: 8 },
+      { name: 'Oscar', initials: 'OS', displayMode:'espectador', role: 'jugador', cardSelected: null, isOwner: false },
+      { name: 'David', initials: 'DA', displayMode:'jugador', role: 'jugador', cardSelected: 5, isOwner: false },
+      { name: 'Albert', initials: 'AL', displayMode:'jugador', role: 'jugador', cardSelected: 3, isOwner: false },
+      { name: 'Pedro', initials: 'PE', displayMode:'jugador', role: 'jugador', cardSelected: 1, isOwner: false },
+      { name: 'Nata', initials: 'NA', displayMode:'jugador', role: 'jugador', cardSelected: 8, isOwner: false },
+      { name: 'Andrea', initials: 'AN', displayMode:'jugador', role: 'jugador', cardSelected: 3, isOwner: false },
+      { name: 'Henry', initials: 'He', displayMode:'jugador', role: 'jugador', cardSelected: 8, isOwner: false },
     ];
     this.connectedUsers = mockOtherUsers;
 
@@ -61,6 +62,7 @@ export class BoardComponent implements OnChanges {
    ngOnChanges(changes: SimpleChanges): void {
     if (changes['displayMode'] && this.currentUser) {
       this.currentUser.displayMode = this.displayMode;
+      this.displayModeChange.emit(this.displayMode); 
       this.cd.detectChanges();
     }
     if (changes['userRole'] && this.currentUser) {
@@ -109,5 +111,16 @@ export class BoardComponent implements OnChanges {
 
     this.voteSummary = [];
     this.average = 0;
+  }
+  makeAdmin(player: Player) {
+  if (this.currentUser.role !== 'administrador') return; 
+  player.role = 'administrador';
+  console.log(`${player.name} ahora es administrador`);
+  console.table([this.currentUser, ...this.connectedUsers].map(u => ({
+    name: u.name,
+    role: u.role,
+    displayMode: u.displayMode,
+    isOwner: u.isOwner
+    })));
   }
 }

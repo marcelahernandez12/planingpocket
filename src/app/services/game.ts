@@ -4,7 +4,8 @@ import { tap } from 'rxjs/operators';
 import { Player } from '../utils/interfaces/interfaces';
 export interface UserData {
   name: string;
-  role: 'jugador' | 'propietario';
+  role: 'jugador' | 'administrador';
+  isOwner: boolean;   
   displayMode: 'jugador' | 'espectador';
 }
 
@@ -26,12 +27,14 @@ export class Game {
     gameName: string, 
     userName: string, 
     displayMode:string, 
-    userRole: string): Observable<any> {
+    userRole: string,
+    isOwner: boolean = false): Observable<any> {
     
     const userData = {
       name: userName,
       displayMode:displayMode,
       role: userRole,
+      isOwner
     };
 
     const sessionData = {
@@ -56,9 +59,14 @@ export class Game {
     return session?.user.displayMode ?? 'jugador';
   }
 
-  getUserRole(): 'jugador' | 'propietario' {
+  getUserRole(): 'jugador' | 'administrador' {
     const session = this.getSessionData();
     return session?.user.role ?? 'jugador';
+  }
+
+  isOwner(): boolean {
+    const session = this.getSessionData();
+    return session?.user.isOwner ?? false;
   }
   getAvailableCards(): (number | string)[] {
     return [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, '?'];
@@ -79,10 +87,8 @@ export class Game {
 
     players.forEach(player => {
       if (player.displayMode === 'jugador' && player.cardSelected !== null) {
-        // contar cada voto
         counts.set(player.cardSelected, (counts.get(player.cardSelected) || 0) + 1);
 
-        // solo los números entran en el promedio
         if (typeof player.cardSelected === 'number') {
           numericVotes.push(player.cardSelected);
         }

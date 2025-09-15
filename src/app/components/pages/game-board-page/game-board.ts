@@ -15,7 +15,7 @@ import { BoardComponent } from '../../organisms/board/board';
 export class GameBoard implements OnInit {
   gameName: string = '';
   userName: string = '';
-  userRole: 'jugador' | 'propietario' = 'jugador';
+  userRole: 'jugador' | 'administrador' = 'jugador';
   displayMode: 'jugador' | 'espectador' = 'jugador';
   gameId: string | null = null;
 

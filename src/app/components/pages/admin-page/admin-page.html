@@ -3,6 +3,9 @@
 <app-admin-form (formSubmit)="isModalOpen = true"></app-admin-form>
 
 <app-modal-container [show]="isModalOpen" (close)="isModalOpen = false">
-  <app-join-game-modal [userRole]="'propietario'"></app-join-game-modal>
+  <app-join-game-modal 
+    [userRole]="'administrador'"
+    [isOwner]="true"
+    ></app-join-game-modal>
 </app-modal-container>
 

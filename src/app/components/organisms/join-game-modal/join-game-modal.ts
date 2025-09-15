@@ -25,9 +25,10 @@ export class JoinGameModalComponent implements OnChanges{
   joinForm: FormGroup;
   @Output() close = new EventEmitter<void>();
   @Input() userName: string = '';
-  @Input() userRole: 'jugador' | 'propietario' = 'jugador';
+  @Input() userRole: 'jugador' | 'administrador' = 'jugador';
   @Input() displayMode: 'jugador' | 'espectador' = 'jugador';
   @Output() displayModeChange = new EventEmitter<'jugador' | 'espectador'>();
+  @Input() isOwner: boolean = false;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['displayMode'] && this.joinForm) {
       this.joinForm.get('displayMode')?.setValue(this.displayMode);
@@ -71,7 +72,7 @@ export class JoinGameModalComponent implements OnChanges{
       this.close.emit();
     } else {
       const gameName = JSON.parse(localStorage.getItem('gameName') || '""');
-      this.gameService.createAndJoinGame(gameName, userName, displayMode, this.userRole)
+      this.gameService.createAndJoinGame(gameName, userName, displayMode, this.userRole, this.isOwner )
         .subscribe(response => {
           if (response.success) {
             this.close.emit();

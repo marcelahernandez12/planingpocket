@@ -15,7 +15,7 @@ import { JoinGameModalComponent } from '../join-game-modal/join-game-modal';
 export class HeaderComponent {
   @Input() gameName: string = '';
   @Input() userName: string = '';
-  @Input() userRole: 'jugador' | 'propietario' = 'jugador';
+  @Input() userRole: 'jugador' | 'administrador' = 'jugador';
   @Input() displayMode: 'jugador' | 'espectador' = 'jugador';
   @Output() displayModeChange = new EventEmitter<'jugador' | 'espectador'>();
   isInviteModalOpen = false;

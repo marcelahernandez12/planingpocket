@@ -5,5 +5,9 @@
 
 
 <app-modal-container [show]="isModalOpen" (close)="isModalOpen = false">
-  <app-join-game-modal [userRole]="'jugador'" ></app-join-game-modal>
+  <app-join-game-modal 
+    [userRole]="'jugador'" 
+    [isOwner]="true"
+  >
+  </app-join-game-modal>
 </app-modal-container>
