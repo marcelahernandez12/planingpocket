@@ -15,7 +15,8 @@ import { FormUtils } from '../../../utils/form-utils';
   selector: 'app-admin-form',
   standalone: true,
   imports: [CommonModule, FormFieldComponent, ButtonComponent, ReactiveFormsModule],
-  templateUrl: './admin-form.html'
+  templateUrl: './admin-form.html',
+  styleUrl:'./admin-form.scss'
 })
 export class AdminForm {
   @Output() formSubmit = new EventEmitter<string>();

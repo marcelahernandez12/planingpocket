@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  border: 1px solid #BB65FF;
+  
   h2 {
     color: #FFF;
     font-family: 'Poppins', sans-serif;
@@ -46,9 +46,18 @@
     display: flex;
     justify-content: space-around;
     gap: 10px;
-
+    
     app-button {
       flex: 1; 
     }
   }
 }
+.formJoin{
+    border: 1px solid #BB65FF;
+    background: #1F0D3F;
+    padding: 50px;
+    border-radius: 25px;
+    opacity: 1;
+    border-width: 1px;
+
+  }

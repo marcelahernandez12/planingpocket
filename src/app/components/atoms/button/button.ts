@@ -11,6 +11,7 @@ export class ButtonComponent {
   @Input() type: 'button' | 'submit' = 'button'; 
   @Output() btnClick = new EventEmitter<void>();
   @Input() className: string = '';
+  @Input() disabled: boolean = false; 
   onClick(): void {
     this.btnClick.emit();
   }

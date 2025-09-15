@@ -7,9 +7,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 100%;
-  letter-spacing: 0%;
   text-align: center;
-  vertical-align: middle;
   padding: 1rem;
   min-width: 50px;
   transition: all 0.2s ease;
@@ -18,10 +16,10 @@
   cursor: pointer;
   box-shadow: 0px 12px 24px 0px #FFFFFF66;
   box-shadow: 0px 4px 24px 0px #FFFFFF3D;
+  &:hover,
   &.selected{
     background: #E4A4FF;
+    color: #330072;
   }
-  &:hover {
-    background: #7b2ff7;
-  }
+  
 }

@@ -4,13 +4,21 @@
       
     </div>
     <app-button 
-      *ngIf="userRole === 'administrador' && allPlayersHaveVoted && !areCardsRevealed"  
+      *ngIf="!loadingReveal && userRole === 'administrador' && allPlayersHaveVoted && !areCardsRevealed && !cardsRevealed"   
       [className]="'reveal-cards'" 
       (click)="reveal()">
-        Revelar cartas
+      Revelar cartas
     </app-button>
+    <div *ngIf="loadingReveal" class="loading-dots-container">
+      <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
     <app-button 
-      *ngIf="userRole === 'administrador' && areCardsRevealed" 
+      *ngIf="!loadingReveal && userRole === 'administrador' && cardsRevealed" 
       [className]="'reset-cards'" 
       (click)="reset()">
       Nueva votación

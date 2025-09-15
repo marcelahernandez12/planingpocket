@@ -23,5 +23,5 @@
   >
   </app-form-field>
 
-  <app-button type="submit">Crear partida</app-button>
+  <app-button type="submit" [disabled]="gameForm.invalid">Crear partida</app-button>
 </form>

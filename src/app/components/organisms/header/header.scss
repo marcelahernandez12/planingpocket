@@ -4,24 +4,35 @@
     padding: 20px 0;
     align-items: center;
     justify-content: space-between;
-    .header-center{
-        .game-title{
+    .header-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+
+        .game-title {
             font-family: Poppins;
             font-weight: 700;
-            font-style: Bold;
             font-size: 26px;
             line-height: 100%;
-            letter-spacing: 0%;
-            text-align: center;
-            vertical-align: middle;
             color: #fff;
         }
     }
-    .header-right{
+    .header-left,
+    .header-right {
+        flex: 1; 
         display: flex;
-        justify-content: space-between;
         align-items: center;
     }
+    .header-left {
+        justify-content: flex-start;
+    }
+
+    .header-right {
+        justify-content: flex-end;
+    }
+    
+    
 }
 .header-title-modal{
     background: #6429CD;

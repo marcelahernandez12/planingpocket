@@ -10,7 +10,8 @@ import { JoinGameModalComponent } from '../../organisms/join-game-modal/join-gam
   selector: 'app-admin-page',
   standalone: true,
   imports: [CommonModule, AdminForm, ModalContainerComponent, JoinGameModalComponent],
-  templateUrl: './admin-page.html'
+  templateUrl: './admin-page.html',
+  styleUrl: './admin-page.scss'
 })
 export class AdminPage implements OnInit{
   isModalOpen = false;

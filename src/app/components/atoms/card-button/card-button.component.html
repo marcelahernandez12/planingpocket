@@ -1,6 +1,7 @@
 <button class="card-btn" [class.selected]="selected" (click)="selectCard()">
-  <ng-container @if(value != null) >
+  @if (value != null) {
     {{ value }}
-  </ng-container>
-  <ng-content @else></ng-content>
+  } @else {
+    <ng-content></ng-content>
+  }
 </button>

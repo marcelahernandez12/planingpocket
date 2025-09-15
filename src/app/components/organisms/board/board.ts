@@ -22,6 +22,8 @@ export class BoardComponent implements OnChanges {
   currentUser!: Player;
   connectedUsers: Player[] = [];
   cards: (number | string)[] = []; 
+  loadingReveal: boolean = false;
+  cardsRevealed: boolean = false; 
   constructor(private gameService: Game, private cd: ChangeDetectorRef) {}
   
   ngOnInit(): void {
@@ -82,17 +84,27 @@ export class BoardComponent implements OnChanges {
   average = 0;
 
   reveal() {
+  if (this.loadingReveal || this.cardsRevealed) return; // evita clicks múltiples
+
+  this.loadingReveal = true;
+  this.cd.detectChanges(); // fuerza render del loading
+
+  setTimeout(() => {
     this.gameService.revealCards();
 
     const jugadores = [this.currentUser, ...this.connectedUsers].filter(
       u => u.displayMode === 'jugador'
     );
-
     const summary = this.gameService.getVoteSummary(jugadores);
-    this.voteSummary = Array.from(summary.counts.entries())
-      .map(([key, value]) => ({ key, value }));
+
+    this.voteSummary = Array.from(summary.counts.entries()).map(([key, value]) => ({ key, value }));
     this.average = summary.average;
-  }
+
+    this.loadingReveal = false;  // oculta animación
+    this.cardsRevealed = true;   // muestra botón de nueva votación
+    this.cd.detectChanges();
+  }, 1000); // duración animación
+}
 
 
   get areCardsRevealed(): boolean {
@@ -111,16 +123,17 @@ export class BoardComponent implements OnChanges {
 
     this.voteSummary = [];
     this.average = 0;
+    this.cardsRevealed = false;
   }
   makeAdmin(player: Player) {
-  if (this.currentUser.role !== 'administrador') return; 
-  player.role = 'administrador';
-  console.log(`${player.name} ahora es administrador`);
-  console.table([this.currentUser, ...this.connectedUsers].map(u => ({
-    name: u.name,
-    role: u.role,
-    displayMode: u.displayMode,
-    isOwner: u.isOwner
-    })));
+    if (this.currentUser.role !== 'administrador') return; 
+    player.role = 'administrador';
+    console.log(`${player.name} ahora es administrador`);
+    console.table([this.currentUser, ...this.connectedUsers].map(u => ({
+      name: u.name,
+      role: u.role,
+      displayMode: u.displayMode,
+      isOwner: u.isOwner
+      })));
   }
 }

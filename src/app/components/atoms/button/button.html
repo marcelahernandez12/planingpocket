@@ -1,4 +1,4 @@
-<button [type]="type" (click)="onClick()" [ngClass]="className">
+<button [type]="type" (click)="onClick()" [disabled]="disabled" [ngClass]="[className, disabled ? 'disabled' : '']" >
     <ng-content></ng-content>
 </button>
  

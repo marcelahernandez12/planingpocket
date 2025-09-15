@@ -1,6 +1,6 @@
 
 
-  <form [formGroup]="joinForm" (ngSubmit)="onJoin()">
+  <form [formGroup]="joinForm" (ngSubmit)="onJoin()" class="formJoin">
     <app-form-field
       [label]="'Tu nombre'"
       [placeholder]="'Jugador 1'"
@@ -23,6 +23,6 @@
     </app-role-selector>
 
     <div class="modal-actions">
-      <app-button type="submit">Continuar</app-button>
+      <app-button type="submit" [disabled]="joinForm.invalid">Continuar</app-button>
     </div>
   </form>
